@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class NewBookComponent implements OnInit {
 
   addBookForm!: FormGroup;
-
+  showError: boolean = false;
   constructor(private service: BookService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
@@ -29,7 +29,10 @@ export class NewBookComponent implements OnInit {
   onSubmit(){
     this.service.addBook(this.addBookForm.value).subscribe(data => {
       this.router.navigate(["/books"]);
+    }, error => {
+      this.showError = true;
     })
   }
+  }
 
-}
+
